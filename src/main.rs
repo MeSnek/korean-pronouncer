@@ -1,6 +1,6 @@
 use hangul::HangulExt;
 
-fn pronounced_as(hangul: &String, ) { 
+fn pronounced(hangul: &String, ) { 
  
 }
 fn main() {
@@ -18,4 +18,4 @@ fn main() {
         print!("{}, ", elem);
     }
 }
-
+//TODO: start implementing the rules. not sure where to start, 받침 or the otherweird ones, look into er
