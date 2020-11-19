@@ -20,7 +20,7 @@ fn main() {
 fn fill_hashmap(hangul: &str, hashmap: &mut HashMap<&str, Vec<&str> > ) {
     let vec = split(hangul);
     let vec = decomp(vec);
-
+    
     //create hashmap
 
 }
@@ -34,11 +34,7 @@ fn decomp(original: Vec<&str>) -> Vec<char> {
     let mut vec: Vec<char> = Vec::new();
     
     for elem in original.into_iter() {
-        let s: String = String::from(elem);
-        
-        vec.push(s.chars().flat_map(|c| c.jamos().unwrap()).collect());
-        //vec.push(elem.to_string().chars().flat_map(|c| c.jamos().unwrap()).collect());
-        //vec.push(elem.chars().flat_map(|c| c.jamos().unwrap()).collect());
+        vec = elem.chars().flat_map(|c| c.jamos().unwrap()).collect();
     }
     return vec;
 }
