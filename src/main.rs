@@ -1,36 +1,34 @@
 use hangul::HangulExt;
 use unic_ucd_hangul::compose_syllable;
 use std::collections::HashMap;
-
+#[warn(unused_variables)]
 fn main() {
-    let mut hashmap: HashMap<&str, Vec<&str> > = HashMap::new();
+    let mut hashmap: HashMap<String, HangulInfo> = HashMap::new();
     let args: Vec<String> = std::env::args().skip(1).collect();
     
     for elem in args.into_iter() {
         let hangul = String::from(elem);
-        let hangul = &hangul[..];
-        fill_hashmap(hangul, &mut hashmap);   
+        let hangul = &hangul[..]; 
+        fill_hashmap(&hangul, &mut hashmap);
+    }
+    for (key, value) in &hashmap {
+        println!("{} is pronounced: {}", value.hangul, value.pronounced_as);
     }
 }
-//every word "한국어를_배우고_싶어요" (_ where there is new word), should be a seperate entry into the hashmap
-fn fill_hashmap(hangul: &str, hashmap: &mut HashMap<&str, Vec<&str>>) {
-    //let vec = split(hangul);        //not needed so find way to get rid of without using .split lmao waste of time
+//every word "한국어를_배우고_싶어요" ( _ where there is new word), should be a seperate entry into the hashmap
+fn fill_hashmap(hangul: & str, hashmap: &mut HashMap<String, HangulInfo>) {                      
     let vec = vec![hangul];
     let vec = decomp(vec);
-    let pronounced = pronounce(vec);
+    let pronounced_as = pronounce(&vec);
 
+    let hangul = String::from(hangul);
     let value = HangulInfo {
-        hangul: String::from(hangul),
+        hangul: hangul.clone(),
         decomposed: vec,
-        pronounced_as: pronounced,
+        pronounced_as: pronounced_as,
     };
     //create hashmap, used the struct as the value (k,v)
-    //hashmap.insert(hangul, value)
-}
-
-fn split(hangul: &str) -> Vec<&str> { 
-    let vec: Vec<&str> = hangul.split(' ').collect();
-    return vec; 
+    hashmap.insert(String::from(hangul), value);
 }
 
 fn decomp(original: Vec<&str>) -> Vec<char> { 
@@ -44,8 +42,10 @@ fn decomp(original: Vec<&str>) -> Vec<char> {
 }
 
 //TODO: start implementing the rules. not sure where to start, 받침 or the otherweird ones, look into er
-fn pronounce(decomp: Vec<char>) -> String {
-
+//REMEBER: make sure u dont transfer ownership of decomps values, because u need them to imake the hangulinfo struct in fill_hashmap
+fn pronounce(decomp: &Vec<char>) -> String {
+    //temp
+    let pronounced = String::from("한");
 
     return pronounced;
 }
