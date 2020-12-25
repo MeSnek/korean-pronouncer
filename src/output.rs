@@ -17,7 +17,7 @@ pub fn help() {
     print!(
 "krpr is a program that tells you how to pronounce korean words/sentences,
 following the advanced pronunciation rules found here:
-https://en.wikibooks.org/wiki/Korean/Advanced_Pronunciation_Rules.
+https://en.wikibooks.org/wiki/Korean/Advanced_Pronunciation_Rules
 Basically why I'm saying this is for you to know that this is for people that
 already know how to pronounce korean, and want to sound more natural.
 I wrote this for personal use, so dont expect it to be perfect.
